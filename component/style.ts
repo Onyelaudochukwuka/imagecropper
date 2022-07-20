@@ -5,6 +5,10 @@ type Style = {
     sliderContainer?: object;
     sliderLabel?: object;
     slider?: object;
+    cancel?: object;
+    resultContainer?: object;
+    container?: object;
+    nameInput?: object;
 }
 export const styles = ():Style => ({
     cropContainer: {
@@ -43,5 +47,24 @@ export const styles = ():Style => ({
     slider: {
         marginLeft: 32,
        
-    },
+    }, cancel: {
+        float: 'left',
+        marginRight: 'auto'
+       
+    }, resultContainer: {
+        width: '100%',
+        display: 'flex',
+        flexDirection:'column',
+        gap: 15,
+    },container: {
+        position: 'relative',
+        width: '75%',
+        margin: 'auto',
+    }, nameInput: {
+        width: '60%',
+        padding: '10px 15px',
+        margin: 'auto',
+        border: '2px solid #888',
+        borderRadius: '10px'
+    }
 })
