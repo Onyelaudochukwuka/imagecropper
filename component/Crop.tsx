@@ -3,7 +3,8 @@ import Cropper from "react-easy-crop";
 import { Point, Area } from "react-easy-crop/types";
 import getCroppedImg from './CropImage';
 import { styles } from './style';
-
+import { cancel } from '../public';
+import Image from "next/image";
 const App = ({ src }: any) => {
     const classes = styles();
     const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });
@@ -96,10 +97,10 @@ const App = ({ src }: any) => {
                     </div>
                 </div> 
                 :
-                <div>
-                    <span onClick={()=>setShowResult(false)}>Cancel</span>
-                    <img src={croppedImage ? croppedImage : ""} />
-                    <input value={name} onChange={(e)=>setName(e.target.value)} placeholder="Save AS"/>
+                <div style={classes.resultContainer}>
+                    <span onClick={()=>setShowResult(false)} style={classes.cancel}><Image src={cancel} height={35} width={35} /></span>
+                    <img style={classes.container} src={croppedImage ? croppedImage : ""} />
+                    <input value={name} onChange={(e)=>setName(e.target.value)} placeholder="Save as" style={classes.nameInput}/>
                             <a href={croppedImage ? croppedImage: ""} download={name}>Download</a>
                         </div>
                 }
