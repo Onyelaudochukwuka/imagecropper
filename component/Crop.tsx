@@ -101,7 +101,7 @@ const App = ({ src }: any) => {
                     <span onClick={()=>setShowResult(false)} style={classes.cancel}><Image src={cancel} height={35} width={35} /></span>
                     <img style={classes.container} src={croppedImage ? croppedImage : ""} />
                     <input value={name} onChange={(e)=>setName(e.target.value)} placeholder="Save as" style={classes.nameInput}/>
-                            <a href={croppedImage ? croppedImage: ""} download={name}>Download</a>
+                            <a style={classes.cropButton} href={croppedImage ? croppedImage: ""} download={name}>Download</a>
                         </div>
                 }
             </>
