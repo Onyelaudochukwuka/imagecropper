@@ -9,6 +9,7 @@ type Style = {
     resultContainer?: object;
     container?: object;
     nameInput?: object;
+    downloadButton?: object;
 }
 export const styles = ():Style => ({
     cropContainer: {
@@ -66,5 +67,8 @@ export const styles = ():Style => ({
         margin: 'auto',
         border: '2px solid #888',
         borderRadius: '10px'
+    }, downloadButton: {
+        width: '100%',
+        marginInline: '10px',
     }
 })
