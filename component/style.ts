@@ -25,6 +25,14 @@ export const styles = ():Style => ({
         marginTop: 20,
         fontSize: 18,
         fontWeight: 'bold',
+        cursor: 'pointer',
+        padding: '10px 15px',
+        transitionProperty: 'all',
+        transitionTimingFunction: 'cubic-bezier(0.4, 0, 1, 1)',
+        transitionDuration: '500ms',
+        textAlign: 'center',
+
+
     },
     controls: {
         padding: 16,
@@ -50,7 +58,8 @@ export const styles = ():Style => ({
        
     }, cancel: {
         float: 'left',
-        marginRight: 'auto'
+        marginRight: 'auto',
+        cursor: 'pointer',
        
     }, resultContainer: {
         width: '100%',
@@ -59,16 +68,28 @@ export const styles = ():Style => ({
         gap: 15,
     },container: {
         position: 'relative',
-        width: '75%',
+        // width: '75%',
         margin: 'auto',
     }, nameInput: {
-        width: '60%',
+        width: '75%',
         padding: '10px 15px',
         margin: 'auto',
         border: '2px solid #888',
-        borderRadius: '10px'
+        borderRadius: '10px',
+        marginTop: '15px',
+
     }, downloadButton: {
         width: '100%',
-        marginInline: '10px',
+        padding: '10px 15px',
+        backgroundColor: '#faebd7',
+        textAlign: 'center',
+        color: '#333',
+        fontWeight: 'bolder',
+        marginTop: '15px',
+        cursor: 'pointer',
+        transitionProperty: 'all',
+        transitionTimingFunction: 'cubic-bezier(0.4, 0, 1, 1)',
+        transitionDuration: '500ms'
+        
     }
 })
