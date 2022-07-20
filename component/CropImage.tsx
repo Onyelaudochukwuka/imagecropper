@@ -32,7 +32,7 @@ export default async function getCroppedImg(
     imageSrc:string,
     pixelCrop:any,
     rotation = 0,
-    flip = { horizontal: false, vertical: false }
+    flip = { horizontal: false, vertical: false },
 ) {
     const image:any = await createImage(imageSrc);
     const canvas = document.createElement('canvas')
@@ -48,7 +48,7 @@ export default async function getCroppedImg(
     const { width: bBoxWidth, height: bBoxHeight } = rotateSize(
         image?.width,
         image?.height,
-        rotation
+        rotation,
     )
 
     // set canvas size to match the bounding box
@@ -87,6 +87,6 @@ export default async function getCroppedImg(
     return new Promise((resolve, reject) => {
         canvas.toBlob((file:any) => {
             resolve(URL.createObjectURL(file))
-        }, 'image/jpeg')
+        }, `image/png`)
     })
 }
