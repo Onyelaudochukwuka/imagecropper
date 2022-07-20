@@ -3,6 +3,7 @@ import Cropper from "react-easy-crop";
 import { Point, Area } from "react-easy-crop/types";
 import getCroppedImg from './CropImage';
 import { styles } from './style';
+
 const App = ({ src }: any) => {
     const classes = styles();
     const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });
@@ -10,27 +11,32 @@ const App = ({ src }: any) => {
     const [zoom, setZoom] = useState(1);
     const [croppedImage, setCroppedImage] = useState(null)
     const [rotation, setRotation] = useState(0);
-    const onCropComplete = useCallback((croppedArea:any, croppedAreaPixels:any) => {
+    const [showResult, setShowResult] = useState(false);
+    const [name, setName] = useState('')
+    const onCropComplete = useCallback((croppedArea: any, croppedAreaPixels: any) => {
         setCroppedAreaPixels(croppedAreaPixels)
-    }, [])
+    }, []);
+    const [fileType, setFileType] = useState('');
+
     const showCroppedImage = useCallback(async () => {
         try {
             const croppedImage:any = await getCroppedImg(
                 src,
                 croppedAreaPixels,
-                rotation
+                rotation,
             )
-            console.log('donee', { croppedImage})
+            console.log('donee', { croppedImage},fileType)
             setCroppedImage(croppedImage);
+            setShowResult(true);
         } catch (e) {
             console.error(e)
         }
-    }, [croppedAreaPixels, rotation])
+    }, [croppedAreaPixels, rotation,fileType])
 
     return (
     <>
-            {src &&
-                <div className="w-full h-auto">
+                {!showResult ?
+                     <div className="w-full h-auto">
         
                     <div style={classes.cropContainer}>
                         <Cropper
@@ -76,10 +82,27 @@ const App = ({ src }: any) => {
                                 style={classes.slider}
                             />
                         </div>
+                        <div style={classes.sliderContainer}>
+                            <label htmlFor="select"></label>
+                            <select name="" id="select" onChange={(e)=>setFileType(e.target.value)}>
+                                <option value="">Select an option</option>
+                                <option value="png">Png</option>
+                                <option value="jpg">Jpg</option>
+                                <option value="svg">Svg</option>
+                                </select>
+                                
+                        </div>
                         <button className="p-6" style={classes.cropButton} onClick={showCroppedImage}>Get Cropped Image</button>
-                        <img src={croppedImage ? croppedImage : ""} />
                     </div>
-                </div>}
+                </div> 
+                :
+                <div>
+                    <span onClick={()=>setShowResult(false)}>Cancel</span>
+                    <img src={croppedImage ? croppedImage : ""} />
+                    <input value={name} onChange={(e)=>setName(e.target.value)} placeholder="Save AS"/>
+                            <a href={croppedImage ? croppedImage: ""} download={name}>Download</a>
+                        </div>
+                }
             </>
     );
 };
