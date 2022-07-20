@@ -13,7 +13,21 @@ const App = ({ src }: any) => {
     const [croppedImage, setCroppedImage] = useState(null)
     const [rotation, setRotation] = useState(0);
     const [showResult, setShowResult] = useState(false);
-    const [name, setName] = useState('')
+    const [name, setName] = useState('');
+    const [color, setColor] = useState({
+        background: '#faebd7',
+        color: '#333'
+    });
+    const [hover, setHover] = useState(
+        {
+            background: '#faebd7',
+            color: '#333'
+        })
+    const [hoverState, setHoverState] = useState(
+        {
+            background: '#faebd7',
+            color: '#333'
+        } )
     const onCropComplete = useCallback((croppedArea: any, croppedAreaPixels: any) => {
         setCroppedAreaPixels(croppedAreaPixels)
     }, []);
@@ -83,7 +97,7 @@ const App = ({ src }: any) => {
                                 style={classes.slider}
                             />
                         </div>
-                        <div style={classes.sliderContainer}>
+                        {/* <div style={classes.sliderContainer}>
                             <label htmlFor="select"></label>
                             <select name="" id="select" onChange={(e)=>setFileType(e.target.value)}>
                                 <option value="">Select an option</option>
@@ -92,16 +106,16 @@ const App = ({ src }: any) => {
                                 <option value="svg">Svg</option>
                                 </select>
                                 
-                        </div>
-                        <button className="p-6" style={classes.cropButton} onClick={showCroppedImage}>Get Cropped Image</button>
+                        </div> */}
+                        <button style={{ ...classes.cropButton, ...hover }} onMouseOut={() => setHover({ background: '#faebd7', color: '#333' })} onMouseOver={() => setHover({ background: '#06b6d4', color: '#fff' })} onClick={showCroppedImage}>Get Cropped Image</button>
                     </div>
                 </div> 
                 :
                 <div style={classes.resultContainer}>
-                    <span onClick={()=>setShowResult(false)} style={classes.cancel}><Image src={cancel} height={35} width={35} /></span>
                     <img style={classes.container} src={croppedImage ? croppedImage : ""} />
                     <input value={name} onChange={(e)=>setName(e.target.value)} placeholder="Save as" style={classes.nameInput}/>
-                            <a style={classes.cropButton} href={croppedImage ? croppedImage: ""} download={name}>Download</a>
+                    <a style={{ ...classes.downloadButton, ...color }} onMouseOut={() => setColor({background: '#faebd7',color: '#333'})} onMouseOver={() => setColor({ background: '#06b6d4', color:'#fff'})} href={croppedImage ? croppedImage: ""} download={name}>Download</a>
+                    <span onClick={() => setShowResult(false)} style={{ ...classes.cropButton, ...hoverState }} onMouseOut={() => setHoverState({ background: '#faebd7', color: '#333' })} onMouseOver={() => setHoverState({ background: '#06b6d4', color: '#fff' })}>Cancel</span>
                         </div>
                 }
             </>
